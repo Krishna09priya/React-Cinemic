@@ -5,18 +5,16 @@ import serviceEndpoints from '../../config/serviceEndpoints';
 
 export const resetMsg = createAction('resetMsg');
 
-export const getMovieView = createAsyncThunk('movies/getMovieView', async (movieId, { rejectWithValue }) => {
+export const getMovieView = createAsyncThunk('movies/getMovieView', async (movie_id, { rejectWithValue }) => {
     try {
-        const response = await apiGateway.get(`${serviceEndpoints.movieView}/${movieId}`);
-        const { success, message, movie } = response?.data?.data;
-        console.log('rrrr',response?.data);
-        console.log(success);
-        console.log('movieee',movie);
+        const response = await apiGateway.get(`${serviceEndpoints.movieView}/${movie_id}`);
+        const { success, message } = response?.data;
         if (success) {
-            return movie;
+            return response?.data?.data;
         }
-        Notification(message,'error')
-        return rejectWithValue(message);
+        if (response?.status !== 400) {
+            Notification(message,'error')
+            return rejectWithValue(message)}
     } catch (error) {
         return rejectWithValue(error.message || 'An error occurred');
     }
@@ -31,7 +29,7 @@ const slice = createSlice({
         movieViewErrorMessage: '',
         ErrorMessage: '',
         isLoading: false,
-        movie:{}
+        movie:null
     },
 
     extraReducers: (builder) => {
@@ -43,18 +41,18 @@ const slice = createSlice({
             })
             .addCase(getMovieView.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.movieViewErrorMessage = payload.message || 'Failed to fetch movie details' ;
+                state.movieViewErrorMessage = payload?.message;
                 state.movieViewSuccessMessage = '';
             })
             .addCase(getMovieView.fulfilled, (state, { payload }) => {
-                state.movie = payload || {};
+                state.movie = payload || null;
                 state.isLoading = false;
                 state.movieViewErrorMessage = '';
-                state.movieViewSuccessMessage = 'Movie details fetched successfully';
+                state.movieViewSuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.errorMessage = '';
-                state.successMessage = '';
+                state.movieViewErrorMessage = '';
+                state.movieViewSuccessMessage = '';
             });
     },
 });

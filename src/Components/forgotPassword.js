@@ -9,7 +9,7 @@ import Notifications from '../utils/notifications';
 
 function ForgotPassword() {
   const dispatch = useDispatch();
-  const {isLoading, forgotPasswordSuccessMessage} = useSelector((states)=> states.forgotPasswordReducer);
+  const {isLoading, forgotPasswordSuccessMessage} = useSelector((states)=> states?.forgotPasswordReducer);
   const [email, setEmail]= useState('');;
 
   const submit = ()=>{

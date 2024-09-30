@@ -10,7 +10,7 @@ import { getMovieList } from "./redux/movieListRedux";
 function MovieListingPage() {
 
   const dispatch = useDispatch()
-  const {isLoading,movielist} = useSelector((states)=> states.movielistReducer);
+  const {isLoading,movielist} = useSelector((states)=> states?.movielistReducer);
   const [params,setParams]=useState({search:"",page:1});
   const [lastPage, setLastPage] = useState(1);
 

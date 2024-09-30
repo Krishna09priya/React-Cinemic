@@ -6,6 +6,8 @@ import watchLaterReducer from '../Components/redux/watchLaterRedux';
 import movieViewReducer from '../Components/redux/movieViewPageRedux';
 import forgotPasswordReducer from '../Components/redux/forgotPasswordRedux';
 import resetPasswordReducer from '../Components/redux/resetPasswordRedux';
+import watchHistoryReducer from '../Components/redux/watchHistoryRedux';
+import ratingReducer from '../Components/redux/ratingRedux';
 
 const rootReducer = combineReducers({
     signupReducer,
@@ -14,7 +16,9 @@ const rootReducer = combineReducers({
     resetPasswordReducer,
     movielistReducer,
     watchLaterReducer,
-    movieViewReducer
+    movieViewReducer,
+    watchHistoryReducer,
+    ratingReducer
 
 });
 

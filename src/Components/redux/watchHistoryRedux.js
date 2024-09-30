@@ -5,10 +5,10 @@ import serviceEndpoints from '../../config/serviceEndpoints';
 
 export const resetMsg = createAction('resetMsg');
 
-export const postWatchlater = createAsyncThunk('/watchlater/postWatchlater', async (data, { rejectWithValue }) => {
+export const postWatchHistory = createAsyncThunk('/watchhistory/postWatchHistory', async (data, { rejectWithValue }) => {
     const body = { ...data };
     try {
-        const response = await apiGateway.post(serviceEndpoints.watchLater, body);
+        const response = await apiGateway.post(serviceEndpoints.watchHistory, body);
         const { success, message } = response.data;
         if (success) {
             return response?.data;
@@ -22,35 +22,35 @@ export const postWatchlater = createAsyncThunk('/watchlater/postWatchlater', asy
 });
 
 const slice = createSlice({
-    name: 'watchLater',
+    name: 'watchHistory',
     initialState: {
         errorMessage: '',
         successMessage: '',
-        watchLaterSuccessMessage: '',
-        watchLaterErrorMessage: '',
+        watchHistorySuccessMessage: '',
+        watchHistoryErrorMessage: '',
         isLoading: false,
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(postWatchlater.pending, (state) => {
+            .addCase(postWatchHistory.pending, (state) => {
                 state.isLoading = true;
-                state.watchLaterErrorMessage = '';
-                state.watchLaterSuccessMessage = '';
+                state.watchHistoryErrorMessage = '';
+                state.watchHistorySuccessMessage = '';
             })
-            .addCase(postWatchlater.rejected, (state, { payload }) => {
+            .addCase(postWatchHistory.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.watchLaterErrorMessage = payload?.message;
-                state.watchLaterSuccessMessage = '';
+                state.watchHistoryErrorMessage = payload?.message;
+                state.watchHistorySuccessMessage = '';
             })
-            .addCase(postWatchlater.fulfilled, (state, { payload }) => {
+            .addCase(postWatchHistory.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.watchLaterErrorMessage = '';
-                state.watchLaterSuccessMessage = payload?.message;
+                state.watchHistoryErrorMessage = '';
+                state.watchHistorySuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.watchLaterErrorMessage = '';
-                state.watchLaterSuccessMessage = '';
+                state.watchHistoryErrorMessage = '';
+                state.watchHistorySuccessMessage = '';
             });
     },
 });

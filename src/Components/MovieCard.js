@@ -6,26 +6,26 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import {postWatchlater} from "./redux/watchLaterRedux";
+import {postWatchlater, resetMsg} from "./redux/watchLaterRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect} from 'react';
 import Notifications from '../utils/notifications';
 
 function MovieCard({showRemoveBtn,showLaterBtn,data=[]}) {
   const dispatch = useDispatch();
-  const {isLoading, watchLaterSuccessMessage, watchLaterErrorMessage} = useSelector((states)=> states.watchLaterReducer);
+  const {watchLaterSuccessMessage} = useSelector((states)=> states?.watchLaterReducer);
 
-  const handleAddToWatchLater = (e, movieId) => {
+  const handleAddToWatchLater = (e, movie_id) => {
+    e.preventDefault();
     e.stopPropagation(); // Prevents event from bubbling up to the card link
-    dispatch(postWatchlater({ movieId })); 
+    dispatch(postWatchlater({ movie_id })); 
   };
 
   useEffect(()=>{
     if(watchLaterSuccessMessage){
       Notifications(watchLaterSuccessMessage,'success')}
-    if(watchLaterErrorMessage){
-      Notifications(watchLaterErrorMessage,'error')}
-  },[watchLaterSuccessMessage,watchLaterErrorMessage])
+      dispatch(resetMsg())
+  },[watchLaterSuccessMessage,dispatch])
 
 
 return (
@@ -33,7 +33,7 @@ return (
       <Row >   
          {data?.map((e)=><Col xs={12} sm={6} md={6} lg={4} xl={2} className="mb-4" key={e?._id}>
          <Link to={`/movie-view-page/${e?._id}`} style={{ textDecoration: 'none', color: '#000' }} key={e?._id}>
-            <Card style={{ width: '100%' }} className="cardStyle">
+            <Card className="cardStyle">
               <Card.Img variant="top" src={e?.thumbnail} />
               <Card.Body style={{color: '#fff',padding: 10}}>
                 <Card.Title style={{fontSize: 15,marginBottom: 10,textAlign: 'left'}}>{e?.title}</Card.Title>
