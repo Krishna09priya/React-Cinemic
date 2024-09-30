@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     {path: '/signup', element:<SignupPage/>},
     { path: '/login', element: <LoginPage/> },
     { path: '/forgotPassword', element: <ForgotPassword/>},
-    {path:'/resetPassword', element:<ResetPassword/>},
+    {path:'/reset-password/:token', element:<ResetPassword/>},
     {path:'/movie-listing-page',element:<MovieListingPage/>},
     {path:'/movie-view-page/:id',element:<MovieViewPage/>},
     {path:'/plan-listing-page', element:<PlanListingPage/>},
