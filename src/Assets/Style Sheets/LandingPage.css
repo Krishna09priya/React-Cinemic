@@ -1,0 +1,48 @@
+.body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+}
+.navbar-dark {
+    background-color: #000;
+}
+.content {
+    height: calc(100vh - 50px); /* Subtracting navbar height */
+}
+.left-content {
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.right-content {
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0) 70%);
+}
+.btn-custom {
+    color: #ffffff;
+    border-radius: 25px;
+    background-color: #000;
+}
+.separator {
+    height: 30px; /* Adjust based on your needs */
+    border-left: 2px solid #ffffff;
+    margin: 0 10px;
+}
+.footer {
+    background-color: #000;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer .logo img {
+    height: 40px;
+    margin-bottom: 10px;
+}
+.footer .details {
+    color: #1a53ff;
+    font-size: 14px;
+}

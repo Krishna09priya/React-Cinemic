@@ -1,0 +1,21 @@
+.movie-view-page{
+  background-color: #000;
+  padding-bottom: 20px;
+}
+.rating-input {
+    font-size: 1.25rem;
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #0000ff;
+  }
+  
+  .rating-input:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+  
+  

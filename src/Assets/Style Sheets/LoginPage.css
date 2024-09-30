@@ -1,0 +1,37 @@
+.loginPage-body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: linear-gradient(to right, #000000 9%, #000066 100%);
+}
+.loginPage-navbar-dark {
+    background-color: #000;
+}
+.loginPage-login-container {
+    background-color: #000;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.loginPage-login-container h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.loginPage-form-control {
+    margin-bottom: 15px;
+}
+.loginPage-btn-custom {
+    color: #fff;
+    background-color: #6600ff;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.loginPage-btn-custom:hover {
+    background-color: #3333ff;
+}
+.loginPage-links-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}

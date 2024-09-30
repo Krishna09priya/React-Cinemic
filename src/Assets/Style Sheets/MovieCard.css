@@ -1,0 +1,25 @@
+.cardStyle {
+    background-color: #000;
+    border: 1px solid #ff0000;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none; /* Remove default text decoration for the card */
+    display: block; /* Make sure the anchor tag is block-level */
+}
+.cardStyle:hover {
+    transform: scale(1.05);
+}
+.plus-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin-left: 0;
+    color: #fff;
+    background-color: #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}

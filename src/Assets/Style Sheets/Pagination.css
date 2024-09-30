@@ -1,0 +1,13 @@
+.pagination-container {
+    margin-top: auto;
+    padding-bottom: 20px;
+}
+.pagination .page-link {
+    color: #ff0000 !important;
+    border-color: #ff0000 !important;
+    background-color: #fff !important;
+}
+.pagination .page-link:hover {
+    background-color: #ff0000 !important;
+    color: #000 !important;
+}
