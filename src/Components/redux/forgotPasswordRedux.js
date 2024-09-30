@@ -5,10 +5,10 @@ import serviceEndpoints from '../../config/serviceEndpoints';
 
 export const resetMsg = createAction('resetMsg');
 
-export const postLogin = createAsyncThunk('login/postLogin', async (data, { rejectWithValue }) => {
+export const postForgotPassword = createAsyncThunk('forgotPassword/postForgotPassword', async (data, { rejectWithValue }) => {
     const body = { ...data };
     try {
-        const response = await apiGateway.post(serviceEndpoints.login, body);
+        const response = await apiGateway.post(serviceEndpoints.forgotPassword, body);
         const { success, message } = response?.data;
         if (success) {
             return response?.data; // Assuming this contains user and accessToken
@@ -22,40 +22,35 @@ export const postLogin = createAsyncThunk('login/postLogin', async (data, { reje
 });
 
 const slice = createSlice({
-    name: 'login',
+    name: 'forgotPassword',
     initialState: {
         errorMessage: '',
         successMessage: '',
-        logInSuccessMessage: '',
-        logInErrorMessage: '',
+        forgotPasswordSuccessMessage: '',
+        forgotPasswordErrorMessage: '',
         isLoading: false,
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(postLogin.pending, (state) => {
+            .addCase(postForgotPassword.pending, (state) => {
                 state.isLoading = true;
-                state.logInErrorMessage = '';
-                state.logInSuccessMessage = '';
+                state.forgotPasswordErrorMessage = '';
+                state.forgotPasswordSuccessMessage = '';
             })
-            .addCase(postLogin.rejected, (state, { payload }) => {
+            .addCase(postForgotPassword.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.logInErrorMessage = payload?.message
-                state.logInSuccessMessage = '';
+                state.forgotPasswordErrorMessage = payload?.message
+                state.forgotPasswordSuccessMessage = '';
             })
-            .addCase(postLogin.fulfilled, (state, { payload }) => {
-                if (payload?.success && payload?.data?.token) {
-                    localStorage.setItem('accessToken',payload?.data?.token);
-                    localStorage.setItem('IsBlocked',payload?.data?.isBlocked);
-                }
-
+            .addCase(postForgotPassword.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.logInErrorMessage = '';
-                state.logInSuccessMessage = payload?.message;
+                state.forgotPasswordErrorMessage = '';
+                state.forgotPasswordSuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.logInErrorMessage = '';
-                state.logInSuccessMessage = '';
+                state.forgotPasswordErrorMessage = '';
+                state.forgotPasswordSuccessMessage = '';
             });
     },
 });
