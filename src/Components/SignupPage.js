@@ -12,11 +12,12 @@ import Notifications from '../utils/notifications';
 function SignupPage() {
   const dispatch = useDispatch();
   const navigate =useNavigate()
-  const {signupSuccessMessage, signupErrorMessage} = useSelector((states)=> states.signupReducer);
+  const {isloading,signupSuccessMessage} = useSelector((states)=> states.signupReducer);
   const [signupCredential, setSignupCredential]= useState({
     username:'',
     email: '',
     password: '',
+    confirmPassword:''
   });;
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -34,12 +35,12 @@ function SignupPage() {
     }))
   }
   useEffect(()=>{
-    if(signupSuccessMessage){ navigate('/login')
-      Notifications(signupSuccessMessage,'success')}
-    if(signupErrorMessage){
-      dispatch(resetMsg())
+    if(signupSuccessMessage){ 
+      Notifications(signupSuccessMessage,'success')
+      navigate('/login')
     }
-  },[signupSuccessMessage,signupErrorMessage])
+    dispatch(resetMsg())
+    },[signupSuccessMessage])
 
   return (
     <div className="loginPage-body">
@@ -131,12 +132,12 @@ function SignupPage() {
                     id="confirmPassword"
                     onChange={(e) => setSignupCredential({ ...signupCredential, confirmPassword: e.target.value })}
                   />
-                  {errorMessage && (
-                <div className="alert alert-danger" role="alert">
+                </div>
+                {errorMessage && (
+                <div className="text-danger">
                   {errorMessage}
                 </div>
               )}
-                </div>
               </div>
             </div>
             <div className="row">

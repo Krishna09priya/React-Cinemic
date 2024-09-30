@@ -13,8 +13,9 @@ export const postLogin = createAsyncThunk('login/postLogin', async (data, { reje
         if (success) {
             return response?.data; // Assuming this contains user and accessToken
         }
-        Notification(message,'error')
-        return rejectWithValue(message);
+        if (response?.status !== 400) {
+            Notification(message,'error')
+            return rejectWithValue(message);}
     } catch (error) {
         return rejectWithValue(error.message || 'An error occurred');
     }
@@ -39,15 +40,14 @@ const slice = createSlice({
             })
             .addCase(postLogin.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.logInErrorMessage = payload || 'Login failed';
+                state.logInErrorMessage = payload.message
                 state.logInSuccessMessage = '';
             })
             .addCase(postLogin.fulfilled, (state, { payload }) => {
-                const { token, success, message,isBlocked } = payload;
-                if (success && token) {
-                    localStorage.setItem('accessToken', token);
-                    localStorage.setItem('IsBlocked', isBlocked);
-                    // window.location.href='/movie-listing-page'
+                const {success, message,data } = payload;
+                if (success && data.token) {
+                    localStorage.setItem('accessToken', data.token);
+                    localStorage.setItem('IsBlocked', data.isBlocked);
                 }
 
                 state.isLoading = false;
@@ -55,8 +55,8 @@ const slice = createSlice({
                 state.logInSuccessMessage = message;
             })
             .addCase(resetMsg, (state) => {
-                state.errorMessage = '';
-                state.successMessage = '';
+                state.logInErrorMessage = '';
+                state.logInSuccessMessage = '';
             });
     },
 });

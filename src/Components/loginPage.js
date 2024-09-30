@@ -24,12 +24,12 @@ const Login = () => {
     }))
   }
   useEffect(()=>{
-    if(logInSuccessMessage){ navigate('/movie-listing-page')
-      Notifications(logInSuccessMessage,'success')}
-    if(logInErrorMessage){
-      dispatch(resetMsg())
+    if(logInSuccessMessage){ 
+      Notifications(logInSuccessMessage,'success')
+      navigate('/movie-listing-page')
     }
-  },[logInSuccessMessage,logInErrorMessage])
+      dispatch(resetMsg())
+  },[logInSuccessMessage])
   return (
     <div className="loginPage-body">
       <nav className="navbar loginPage-navbar-dark" style={{ height: 50 }}>
