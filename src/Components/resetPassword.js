@@ -1,8 +1,42 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Assets/Style Sheets/ResetPassword.css";
+import { useNavigate,useParams } from "react-router-dom";
 import { FaUserLock, FaLock } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { postResetPassword, resetMsg } from './redux/resetPasswordRedux';
+import Notifications from '../utils/notifications';
 
 function ResetPassword() {
+  const { token } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isLoading, resetPasswordSuccessMessage } = useSelector((state) => state?.resetPasswordReducer);
+  const [passwordResetCredential, setPasswordResetCredential]= useState({
+    password: '',
+    confirmPassword:''
+  });;
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const submit = ()=>{
+    if (passwordResetCredential.password !== passwordResetCredential.confirmPassword) {
+      setErrorMessage("Passwords do not match!");
+      return;
+    }
+    // If passwords match, dispatch the signup action
+    setErrorMessage("");
+    dispatch(postResetPassword({password:passwordResetCredential.password,token:token}))
+  }
+  useEffect(()=>{
+    if(resetPasswordSuccessMessage){ 
+      Notifications(resetPasswordSuccessMessage,'success')
+      navigate('/login')
+    }
+      dispatch(resetMsg())
+  },[resetPasswordSuccessMessage,dispatch])
+
+
   return (
     <div className="resetPassword-body">
       <div className="container-fluid">
@@ -11,7 +45,7 @@ function ResetPassword() {
             <div className="resetPassword-login-container">
               <h3>Reset Password</h3>
               <FaUserLock className="resetPassword-fa-user-lock" />
-              <form action="" method="">
+              {/* <form action="" method=""> */}
                 <div className="row mb-3">
                   <div className="col-sm-12">
                     <div className="input-group">
@@ -27,8 +61,9 @@ function ResetPassword() {
                         type="password"
                         className=" form-control resetPassword-form-control"
                         placeholder="New Password"
-                        name="newPassword"
-                        id="newPassword"
+                        name="password"
+                        id="password"
+                        onChange={(e)=>setPasswordResetCredential({...passwordResetCredential,password:e.target.value})}
                       />
                     </div>
                   </div>
@@ -48,10 +83,16 @@ function ResetPassword() {
                         type="password"
                         className="form-control resetPassword-form-control"
                         placeholder="Confirm New Password"
-                        name="confirmNewPassword"
-                        id="confirmNewPassword"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        onChange={(e)=>setPasswordResetCredential({...passwordResetCredential, confirmPassword:e.target.value})}
                       />
                     </div>
+                    {errorMessage && (
+                <div className="text-danger">
+                  {errorMessage}
+                </div>
+              )}
                   </div>
                 </div>
                 <div className="row">
@@ -60,12 +101,13 @@ function ResetPassword() {
                       type="submit"
                       className="resetPassword-btn-custom"
                       style={{ width: "100%" }}
+                      onClick={submit}
                     >
                       Reset Password
                     </button>
                   </div>
                 </div>
-              </form>
+              {/* </form> */}
             </div>
           </div>
         </div>

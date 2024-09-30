@@ -11,7 +11,7 @@ import Notifications from '../utils/notifications';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate =useNavigate()
-  const {isLoading, logInSuccessMessage, logInErrorMessage} = useSelector((states)=> states.loginReducer);
+  const {isLoading, logInSuccessMessage} = useSelector((states)=> states.loginReducer);
   const [loginCredential, setLoginCredential]= useState({
     email: '',
     password: '',

@@ -2,8 +2,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../Assets/Style Sheets/ForgotPassword.css"
 import { Link } from "react-router-dom";
 import { FaCaretLeft, FaEnvelope } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { postForgotPassword, resetMsg } from './redux/forgotPasswordRedux';
+import Notifications from '../utils/notifications';
 
 function ForgotPassword() {
+  const dispatch = useDispatch();
+  const {isLoading, forgotPasswordSuccessMessage} = useSelector((states)=> states.forgotPasswordReducer);
+  const [email, setEmail]= useState('');;
+
+  const submit = ()=>{
+    dispatch(postForgotPassword(email))
+  }
+  useEffect(()=>{
+    if(forgotPasswordSuccessMessage){ 
+      Notifications(forgotPasswordSuccessMessage,'success')
+    }
+      dispatch(resetMsg())
+  },[forgotPasswordSuccessMessage])
+
   return (
     <div className="forgotPassword-body">
       <div className="container-fluid">
@@ -14,7 +32,7 @@ function ForgotPassword() {
               <p>
                 Enter your email &amp; we'll send you a link to reset your password
               </p>
-              <form action="" method="">
+              {/* <form action="" method=""> */}
                 <div className="row mb-3">
                   <div className="col-sm-12">
                     <div className="input-group">
@@ -32,14 +50,22 @@ function ForgotPassword() {
                         placeholder="Email"
                         name="email"
                         id="email"
+                        onChange={(e)=>setEmail({...email, email:e.target.value})}
                       />
                     </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-sm-12">
-                    <button type="submit" className="forgotPassword-btn-custom">
-                      Submit
+                    <button type="submit" className="forgotPassword-btn-custom" onClick={submit}
+                    disabled={isLoading}  // Disable the button when loading
+                    >
+                      {isLoading ? (
+                        <div className="spinner-border spinner-border-sm text-light" role="status">
+                        </div>
+                      ) : (
+                        'Submit'
+                      )}
                     </button>
                   </div>
                 </div>
@@ -49,7 +75,7 @@ function ForgotPassword() {
                     Back to login
                   </Link>
                 </p>
-              </form>
+              {/* </form> */}
             </div>
           </div>
         </div>

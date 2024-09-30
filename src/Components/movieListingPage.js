@@ -33,7 +33,7 @@ function MovieListingPage() {
 
   return (
     <div className="movie-list-body d-flex flex-column" style={{ minHeight: "100vh", backgroundColor: "#000" }}>
-      <Navbar />
+      <Navbar/>
       <div className="container flex-grow-1" >
         <div className="mt-5 mb-3 mx-auto">
           <div className="row">
