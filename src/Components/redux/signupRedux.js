@@ -9,12 +9,13 @@ export const postSignup = createAsyncThunk('signup/postSignup', async (data, { r
     const body = { ...data };
     try {
         const response = await apiGateway.post(serviceEndpoints.signup, body);
-        const { success, message } = response.data;
+        const { success, message } = response?.data;
         if (success) {
-            return response?.data; // Assuming this contains user and accessToken
+            return response?.data; 
         }
+        if (response?.status !== 400) {
         Notification(message,'error')
-        return rejectWithValue(message);
+        return rejectWithValue(message)}
     } catch (error) {
         return rejectWithValue(error.message || 'An error occurred');
     }
@@ -39,19 +40,17 @@ const slice = createSlice({
             })
             .addCase(postSignup.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.signupErrorMessage = payload || 'signup failed';
+                state.signupErrorMessage = payload?.message;
                 state.signupSuccessMessage = '';
             })
             .addCase(postSignup.fulfilled, (state, { payload }) => {
-                const { message } = payload;
-
                 state.isLoading = false;
                 state.signupErrorMessage = '';
-                state.signupSuccessMessage = message;
+                state.signupSuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.errorMessage = '';
-                state.successMessage = '';
+                state.signupErrorMessage = '';
+                state.signupSuccessMessage = '';
             });
     },
 });
