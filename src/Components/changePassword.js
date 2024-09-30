@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Assets/Style Sheets/ChangePassword.css";
 import { FaUserLock, FaLock } from "react-icons/fa";
-import Navbar from "./Navbar";
+import NavbarComponent from "./Navbar";
 
 function ChangePassword() {
   return (
     <div className="changePassword-body">
-        <Navbar/>
+        <NavbarComponent/>
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-sm-6 col-md-6 col-lg-4">

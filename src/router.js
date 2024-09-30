@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     { path: '/forgotPassword', element: <ForgotPassword/>},
     {path:'/reset-password/:token', element:<ResetPassword/>},
     {path:'/movie-listing-page',element:<MovieListingPage/>},
-    {path:'/movie-view-page/:id',element:<MovieViewPage/>},
+    {path:'/movie-view-page/:movie_id',element:<MovieViewPage/>},
     {path:'/plan-listing-page', element:<PlanListingPage/>},
     {path:'/changePassword', element:<ChangePassword/>},
     {path:'/watchlist', element:<Watchlist/>},

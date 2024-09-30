@@ -12,7 +12,7 @@ function ResetPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, resetPasswordSuccessMessage } = useSelector((state) => state?.resetPasswordReducer);
+  const { resetPasswordSuccessMessage } = useSelector((state) => state?.resetPasswordReducer);
   const [passwordResetCredential, setPasswordResetCredential]= useState({
     password: '',
     confirmPassword:''

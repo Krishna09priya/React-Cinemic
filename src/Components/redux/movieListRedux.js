@@ -14,8 +14,9 @@ export const getMovieList = createAsyncThunk('/getMovielist', async (data, { rej
         if (success) {
             return response?.data;
         }
-        Notification(message,'error')
-        return rejectWithValue(message);
+        if (response?.status !== 400) {
+            Notification(message,'error')
+            return rejectWithValue(message)}
     } catch (error) {
         return rejectWithValue(error.message || 'An error occurred');
     }
@@ -30,7 +31,7 @@ const slice = createSlice({
         movieListErrorMessage: '',
         ErrorMessage: '',
         isLoading: false,
-        movielist:{}
+        movielist:[]
     },
 
     extraReducers: (builder) => {
@@ -52,8 +53,8 @@ const slice = createSlice({
                 state.movieListSuccessMessage = payload.message;
             })
             .addCase(resetMsg, (state) => {
-                state.errorMessage = '';
-                state.successMessage = '';
+                state.movieListErrorMessage = '';
+                state.movieListSuccessMessage = '';
             });
     },
 });

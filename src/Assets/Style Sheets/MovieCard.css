@@ -1,13 +1,22 @@
 .cardStyle {
+    width: 100%; 
+    height: 400px;
     background-color: #000;
     border: 1px solid #ff0000;
     cursor: pointer;
     transition: transform 0.3s ease;
     text-decoration: none; /* Remove default text decoration for the card */
     display: block; /* Make sure the anchor tag is block-level */
+    border-radius: 8px;
+    overflow: hidden;
 }
 .cardStyle:hover {
     transform: scale(1.05);
+}
+.cardStyle img {
+    width: 100%;
+    height: 60%; /* Control the image height */
+    object-fit: cover; /* Ensures the image fills the card without distortion */
 }
 .plus-icon {
     display: inline-flex;
