@@ -5,6 +5,8 @@ forgotPassword: "/forgot-password",
 resetPassword:'/reset-password',
 movielist:'/movies',
 watchLater:'/watch-later',
-movieView:'/movie-detail-page'
+movieView:'/movie-detail-page',
+watchHistory:'/watch-history',
+rating:'/rating'
 }
-export default serviceEndpoints;
+export default serviceEndpoints

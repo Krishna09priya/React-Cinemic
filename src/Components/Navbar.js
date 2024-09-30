@@ -7,7 +7,7 @@ import { FaUser } from "react-icons/fa";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg main-navbar-dark" style={{ height: 50 }}>
+    <nav className="navbar navbar-expand-sm main-navbar-dark" style={{ height: 50 }}>
       <NavLink className="navbar-brand" to="#">
         <img
           src={logo}

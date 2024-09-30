@@ -5,10 +5,10 @@ import serviceEndpoints from '../../config/serviceEndpoints';
 
 export const resetMsg = createAction('resetMsg');
 
-export const postWatchlater = createAsyncThunk('/watchlater/postWatchlater', async (data, { rejectWithValue }) => {
+export const postRating = createAsyncThunk('/rating/postRating', async (data, { rejectWithValue }) => {
     const body = { ...data };
     try {
-        const response = await apiGateway.post(serviceEndpoints.watchLater, body);
+        const response = await apiGateway.post(serviceEndpoints.rating, body);
         const { success, message } = response.data;
         if (success) {
             return response?.data;
@@ -22,35 +22,35 @@ export const postWatchlater = createAsyncThunk('/watchlater/postWatchlater', asy
 });
 
 const slice = createSlice({
-    name: 'watchLater',
+    name: 'rating',
     initialState: {
         errorMessage: '',
         successMessage: '',
-        watchLaterSuccessMessage: '',
-        watchLaterErrorMessage: '',
+        ratingSuccessMessage: '',
+        ratingErrorMessage: '',
         isLoading: false,
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(postWatchlater.pending, (state) => {
+            .addCase(postRating.pending, (state) => {
                 state.isLoading = true;
-                state.watchLaterErrorMessage = '';
-                state.watchLaterSuccessMessage = '';
+                state.ratingErrorMessage = '';
+                state.ratingSuccessMessage = '';
             })
-            .addCase(postWatchlater.rejected, (state, { payload }) => {
+            .addCase(postRating.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.watchLaterErrorMessage = payload?.message;
-                state.watchLaterSuccessMessage = '';
+                state.ratingErrorMessage = payload?.message;
+                state.ratingSuccessMessage = '';
             })
-            .addCase(postWatchlater.fulfilled, (state, { payload }) => {
+            .addCase(postRating.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.watchLaterErrorMessage = '';
-                state.watchLaterSuccessMessage = payload?.message;
+                state.ratingErrorMessage = '';
+                state.ratingSuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.watchLaterErrorMessage = '';
-                state.watchLaterSuccessMessage = '';
+                state.ratingErrorMessage = '';
+                state.ratingSuccessMessage = '';
             });
     },
 });
