@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Assets/Style Sheets/MovieViewPage.css";
 import Navbar from "./Navbar";
+import ReactPlayer from "react-player";
 import { FaPlusCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -113,13 +114,12 @@ function MovieViewPage() {
             ) : (
               <p>No video available</p>
             )} */}
-            <iframe width="560" height="315" 
-            src={movie?.video} 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            onClick={()=>handleWatchHistory(movie_id)}></iframe>
+             <ReactPlayer  
+            url={movie?.video} 
+            controls
+            width="100%"
+            style={{ maxWidth: "600px" }}
+            onStart={()=>handleWatchHistory(movie_id)}/>
           </div>
         </div>
 
