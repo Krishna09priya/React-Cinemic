@@ -7,6 +7,7 @@ movielist:'/movies',
 watchLater:'/watch-later',
 movieView:'/movie-detail-page',
 watchHistory:'/watch-history',
-rating:'/rating'
+rating:'/rating',
+planlist:'/plans'
 }
 export default serviceEndpoints

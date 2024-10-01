@@ -3,14 +3,13 @@ import apiGateway from '../../config/service';
 import serviceEndpoints from '../../config/serviceEndpoints';
 import { getQueryParams } from '../../utils/queryParams';
 
-
 export const resetMsg = createAction('resetMsg');
 
-export const getMovieList = createAsyncThunk('/getMovielist', async (data, { rejectWithValue }) => {
+export const getPlanList = createAsyncThunk('/getPlanlist', async (data,{ rejectWithValue }) => {
     try {
-        const{...params}=data
-        const response = await apiGateway.get(`${serviceEndpoints.movielist}?${getQueryParams(params)}`);
-        const { success, message } = response.data;
+        const{...currentPage}=data
+        const response = await apiGateway.get(`${serviceEndpoints.planlist}?${getQueryParams(currentPage)}`);
+        const { success, message } = response?.data;
         if (success) {
             return response?.data;
         }
@@ -23,38 +22,38 @@ export const getMovieList = createAsyncThunk('/getMovielist', async (data, { rej
 });
 
 const slice = createSlice({
-    name: 'movies',
+    name: 'plans',
     initialState: {
         errorMessage: '',
         successMessage: '',
-        movieListSuccessMessage: '',
-        movieListErrorMessage: '',
+        planListSuccessMessage: '',
+        planListErrorMessage: '',
         ErrorMessage: '',
         isLoading: false,
-        movielist:[]
+        planlist:[]
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(getMovieList.pending, (state) => {
+            .addCase(getPlanList.pending, (state) => {
                 state.isLoading = true;
-                state.movieListErrorMessage = '';
-                state.movieListSuccessMessage = '';
+                state.planListErrorMessage = '';
+                state.planListSuccessMessage = '';
             })
-            .addCase(getMovieList.rejected, (state, { payload }) => {
+            .addCase(getPlanList.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.movieListErrorMessage = payload?.message ;
-                state.movieListSuccessMessage = '';
+                state.planListErrorMessage = payload?.message ;
+                state.planListSuccessMessage = '';
             })
-            .addCase(getMovieList.fulfilled, (state, { payload }) => {
-                state.movielist =payload || null;
+            .addCase(getPlanList.fulfilled, (state, { payload }) => {
+                state.planlist =payload || null;
                 state.isLoading = false;
-                state.movieListErrorMessage = '';
-                state.movieListSuccessMessage = payload?.message;
+                state.planListErrorMessage = '';
+                state.planListSuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.movieListErrorMessage = '';
-                state.movieListSuccessMessage = '';
+                state.planListErrorMessage = '';
+                state.planListSuccessMessage = '';
             });
     },
 });
