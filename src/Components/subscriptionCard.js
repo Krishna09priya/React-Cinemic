@@ -7,26 +7,27 @@ import Col from 'react-bootstrap/Col';
 import { FaRupeeSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function SubscriptionCard({showSubscribeBtn}) {
+function SubscriptionCard({showSubscribeBtn,data=[]}) {
 
   return (
     <Container>
       <Row >
-          
-         <Col xs={12} sm={6} md={6} lg={4} xl={3} className="mb-4">
-         <Link to="/plan-view-page" style={{ textDecoration: 'none', color: '#000' }}>
-            <Card style={{ width: '100%' }} className="cardStyle">
+         {data?.map((e)=>
+         <Col xs={12} sm={6} md={6} lg={4} xl={3} className="mb-4" key={e?._id}>
+         <Link to={`/plan-view-page/${e?._id}`} style={{ textDecoration: 'none', color: '#000' }} key={e?._id}>
+            <Card style={{ width: '100%',height:280}} className="cardStyle">
               <Card.Body style={{color: '#fff',padding: 10}}>
-                <Card.Title style={{fontSize: 25,marginBottom: 10,textAlign: 'left'}}>Premium</Card.Title>
-                     <Card.Text style={{fontSize: 15, textAlign:'left'}}> Now, get access to over 38 OTT platforms and watch movies, web series, sports and TV shows using a single app starting at 149rs only. OTTplay Premium gives you access to the following streaming platforms: * Sony LIV app. * ZEE5 app. * Lionsgate Play app.</Card.Text>
-                     <Card.Text style={{fontSize: 15, textAlign:'left'}}>Price:<FaRupeeSign/>699 </Card.Text>
-                     <Card.Text style={{fontSize: 15, textAlign:'left'}}>Duration:84 days</Card.Text>
-                        {showSubscribeBtn &&  <button>Subscribe Now
+                <Card.Title style={{fontSize: 25,marginBottom: 10,textAlign: 'left'}}>{e?.plan}</Card.Title>
+                     <Card.Text style={{fontSize: 15, textAlign:'left'}}> {e?.description}</Card.Text>
+                     <Card.Text style={{fontSize: 15, textAlign:'left'}}>Price:<FaRupeeSign/>{e?.price} </Card.Text>
+                     <Card.Text style={{fontSize: 15, textAlign:'left'}}>Duration:{e?.duration}</Card.Text>
+                        {showSubscribeBtn &&  <button style={{marginTop : 20}}>Subscribe Now
                                     </button>}
               </Card.Body>
             </Card>
             </Link>
             </Col>
+            )}
         </Row>
     </Container>
   );

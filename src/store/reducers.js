@@ -8,6 +8,10 @@ import forgotPasswordReducer from '../Components/redux/forgotPasswordRedux';
 import resetPasswordReducer from '../Components/redux/resetPasswordRedux';
 import watchHistoryReducer from '../Components/redux/watchHistoryRedux';
 import ratingReducer from '../Components/redux/ratingRedux';
+import subscriptionListingReducer from '../Components/redux/subscriptionListingRedux';
+import planViewPageReducer from '../Components/redux/planViewPageRedux';
+import getWatchLaterReducer from '../Components/redux/getWatchLaterRedux';
+import getWatchHistoryReducer from '../Components/redux/getWatchHistoryRedux';
 
 const rootReducer = combineReducers({
     signupReducer,
@@ -18,7 +22,11 @@ const rootReducer = combineReducers({
     watchLaterReducer,
     movieViewReducer,
     watchHistoryReducer,
-    ratingReducer
+    ratingReducer,
+    subscriptionListingReducer,
+    planViewPageReducer,
+    getWatchLaterReducer,
+    getWatchHistoryReducer
 
 });
 
