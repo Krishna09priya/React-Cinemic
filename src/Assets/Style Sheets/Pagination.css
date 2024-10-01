@@ -11,3 +11,8 @@
     background-color: #ff0000 !important;
     color: #000 !important;
 }
+.pagination .active .page-link {
+    background-color: yellow !important;
+    color: #000 !important;
+    border-color: yellow !important;
+}

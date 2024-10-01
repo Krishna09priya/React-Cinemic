@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     {path:'/watchlist', element:<Watchlist/>},
     {path:'/watch-history', element:<WatchHistory/>},
     {path:'/plan-status-page', element:<PlanStatusPage/>},
-    {path:'/plan-view-page', element:<PlanViewPage/>},
+    {path:'/plan-view-page/:plan_id', element:<PlanViewPage/>},
 
 ]);
 

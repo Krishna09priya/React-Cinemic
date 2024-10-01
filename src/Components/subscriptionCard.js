@@ -14,7 +14,7 @@ function SubscriptionCard({showSubscribeBtn,data=[]}) {
       <Row >
          {data?.map((e)=>
          <Col xs={12} sm={6} md={6} lg={4} xl={3} className="mb-4" key={e?._id}>
-         <Link to="/plan-view-page" style={{ textDecoration: 'none', color: '#000' }}>
+         <Link to={`/plan-view-page/${e?._id}`} style={{ textDecoration: 'none', color: '#000' }} key={e?._id}>
             <Card style={{ width: '100%',height:280}} className="cardStyle">
               <Card.Body style={{color: '#fff',padding: 10}}>
                 <Card.Title style={{fontSize: 25,marginBottom: 10,textAlign: 'left'}}>{e?.plan}</Card.Title>

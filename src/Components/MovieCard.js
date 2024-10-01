@@ -12,6 +12,7 @@ import { useEffect} from 'react';
 import Notifications from '../utils/notifications';
 
 function MovieCard({showRemoveBtn,showLaterBtn,data=[]}) {
+  
   const dispatch = useDispatch();
   const {watchLaterSuccessMessage} = useSelector((states)=> states?.watchLaterReducer);
 

@@ -5,9 +5,9 @@ import { getQueryParams } from '../../utils/queryParams';
 
 export const resetMsg = createAction('resetMsg');
 
-export const getPlanList = createAsyncThunk('/getPlanlist', async (currentPage,{ rejectWithValue }) => {
+export const getWatchHistory = createAsyncThunk('/getWatchHistory', async (currentPage,{ rejectWithValue }) => {
     try {
-        const response = await apiGateway.get(`${serviceEndpoints.planlist}?${getQueryParams({ page: currentPage })}`);
+        const response = await apiGateway.get(`${serviceEndpoints.getWatchHistory}?${getQueryParams({ page: currentPage })}`);
         const { success, message } = response?.data;
         if (success) {
             return response?.data;
@@ -21,38 +21,38 @@ export const getPlanList = createAsyncThunk('/getPlanlist', async (currentPage,{
 });
 
 const slice = createSlice({
-    name: 'plans',
+    name: 'getWatchHistory',
     initialState: {
         errorMessage: '',
         successMessage: '',
-        planListSuccessMessage: '',
-        planListErrorMessage: '',
+        getWatchHistorySuccessMessage: '',
+        getWatchHistoryErrorMessage: '',
         ErrorMessage: '',
         isLoading: false,
-        planlist:[]
+        watchHistorylist:[]
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(getPlanList.pending, (state) => {
+            .addCase(getWatchHistory.pending, (state) => {
                 state.isLoading = true;
-                state.planListErrorMessage = '';
-                state.planListSuccessMessage = '';
+                state.getWatchHistoryErrorMessage = '';
+                state.getWatchHistorySuccessMessage = '';
             })
-            .addCase(getPlanList.rejected, (state, { payload }) => {
+            .addCase(getWatchHistory.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.planListErrorMessage = payload?.message ;
-                state.planListSuccessMessage = '';
+                state.getWatchHistoryErrorMessage = payload?.message ;
+                state.getWatchHistorySuccessMessage = '';
             })
-            .addCase(getPlanList.fulfilled, (state, { payload }) => {
-                state.planlist =payload || null;
+            .addCase(getWatchHistory.fulfilled, (state, { payload }) => {
+                state.watchHistorylist = payload || null;
                 state.isLoading = false;
-                state.planListErrorMessage = '';
-                state.planListSuccessMessage = payload?.message;
+                state.getWatchHistoryErrorMessage = '';
+                state.getWatchHistorySuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.planListErrorMessage = '';
-                state.planListSuccessMessage = '';
+                state.getWatchHistoryErrorMessage = '';
+                state.getWatchHistorySuccessMessage = '';
             });
     },
 });

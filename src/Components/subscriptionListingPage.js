@@ -15,7 +15,6 @@ function PlanListingPage() {
   useEffect(() => {
     dispatch(getPlanList(currentPage));
   }, [dispatch, currentPage]);
-
   
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -38,7 +37,7 @@ function PlanListingPage() {
     </div>
     <div className="mt-auto">
     <Pagination
-    currentPage={planlist?.page} 
+    currentPage={currentPage} 
     totalPages={planlist?.totalPages} 
     onPageChange={handlePageChange} />
     </div>

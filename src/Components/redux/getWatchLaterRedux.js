@@ -5,9 +5,9 @@ import { getQueryParams } from '../../utils/queryParams';
 
 export const resetMsg = createAction('resetMsg');
 
-export const getPlanList = createAsyncThunk('/getPlanlist', async (currentPage,{ rejectWithValue }) => {
+export const getWatchlater = createAsyncThunk('/getWatchlater', async (currentPage,{ rejectWithValue }) => {
     try {
-        const response = await apiGateway.get(`${serviceEndpoints.planlist}?${getQueryParams({ page: currentPage })}`);
+        const response = await apiGateway.get(`${serviceEndpoints.getWatchLater}?${getQueryParams({ page: currentPage })}`);
         const { success, message } = response?.data;
         if (success) {
             return response?.data;
@@ -21,38 +21,38 @@ export const getPlanList = createAsyncThunk('/getPlanlist', async (currentPage,{
 });
 
 const slice = createSlice({
-    name: 'plans',
+    name: 'getWatchlater',
     initialState: {
         errorMessage: '',
         successMessage: '',
-        planListSuccessMessage: '',
-        planListErrorMessage: '',
+        getWatchlaterSuccessMessage: '',
+        getWatchlaterErrorMessage: '',
         ErrorMessage: '',
         isLoading: false,
-        planlist:[]
+        watchlaterlist:[]
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(getPlanList.pending, (state) => {
+            .addCase(getWatchlater.pending, (state) => {
                 state.isLoading = true;
-                state.planListErrorMessage = '';
-                state.planListSuccessMessage = '';
+                state.getWatchlaterErrorMessage = '';
+                state.getWatchlaterSuccessMessage = '';
             })
-            .addCase(getPlanList.rejected, (state, { payload }) => {
+            .addCase(getWatchlater.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.planListErrorMessage = payload?.message ;
-                state.planListSuccessMessage = '';
+                state.getWatchlaterErrorMessage = payload?.message ;
+                state.getWatchlaterSuccessMessage = '';
             })
-            .addCase(getPlanList.fulfilled, (state, { payload }) => {
-                state.planlist =payload || null;
+            .addCase(getWatchlater.fulfilled, (state, { payload }) => {
+                state.watchlaterlist = payload || null;
                 state.isLoading = false;
-                state.planListErrorMessage = '';
-                state.planListSuccessMessage = payload?.message;
+                state.getWatchlaterErrorMessage = '';
+                state.getWatchlaterSuccessMessage = payload?.message;
             })
             .addCase(resetMsg, (state) => {
-                state.planListErrorMessage = '';
-                state.planListSuccessMessage = '';
+                state.getWatchlaterErrorMessage = '';
+                state.getWatchlaterSuccessMessage = '';
             });
     },
 });
