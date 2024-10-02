@@ -12,5 +12,8 @@ planlist:'/plans',
 planView:'/plan-detail-page',
 getWatchLater:'/watch-later',
 getWatchHistory:'/watch-history',
+deleteMovie:'/watch-later',
+changePassword:'/change-password',
+subscriptionStatus:'/subscription-status'
 }
 export default serviceEndpoints

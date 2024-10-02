@@ -8,7 +8,7 @@ import MovieListingPage from "./Components/movieListingPage";
 import MovieViewPage from "./Components/movieViewPage";
 import PlanListingPage from "./Components/subscriptionListingPage";
 import ChangePassword from "./Components/changePassword";
-import Watchlist from "./Components/WatchList";
+import Watchlater from "./Components/WatchLater";
 import WatchHistory from "./Components/watchHistory";
 import PlanStatusPage from "./Components/subscriptionStatus";
 import PlanViewPage from "./Components/planViewPage";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     {path:'/movie-view-page/:movie_id',element:<MovieViewPage/>},
     {path:'/plan-listing-page', element:<PlanListingPage/>},
     {path:'/changePassword', element:<ChangePassword/>},
-    {path:'/watchlist', element:<Watchlist/>},
+    {path:'/watchlater', element:<Watchlater/>},
     {path:'/watch-history', element:<WatchHistory/>},
     {path:'/plan-status-page', element:<PlanStatusPage/>},
     {path:'/plan-view-page/:plan_id', element:<PlanViewPage/>},

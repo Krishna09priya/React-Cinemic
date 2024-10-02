@@ -5,20 +5,21 @@ import ReactPlayer from "react-player";
 import { FaPlusCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"; // For getting id from URL
-import { getMovieView, resetMsg } from "./redux/movieViewPageRedux";
-import {postWatchlater} from "./redux/watchLaterRedux";
+import { useParams } from "react-router-dom";
+import { getMovieView} from "./redux/movieViewPageRedux";
+import {postWatchlater, watchResetMsg} from "./redux/watchLaterRedux";
 import { postWatchHistory} from "./redux/watchHistoryRedux";
-import { postRating} from "./redux/ratingRedux";
+import { postRating,ratingResetMsg} from "./redux/ratingRedux";
 import Notifications from "../utils/notifications";
 
 function MovieViewPage() {
   const { movie_id } = useParams();
-  
   const dispatch = useDispatch();
+
   const { movie, isLoading} = useSelector((state) => state?.movieViewReducer);
   const {watchLaterSuccessMessage} = useSelector((states)=> states?.watchLaterReducer);
   const {ratingSuccessMessage} = useSelector((states)=> states?.ratingReducer);
+  
   const[rating, setRating]=useState(0);
   const [isRatingSubmitted, setIsRatingSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,13 +33,13 @@ function MovieViewPage() {
   useEffect(()=>{
     if(watchLaterSuccessMessage){
       Notifications(watchLaterSuccessMessage,'success')}
-      dispatch(resetMsg())
+      dispatch(watchResetMsg())
   },[watchLaterSuccessMessage,dispatch])
 
   useEffect(()=>{
     if(ratingSuccessMessage){
       Notifications(ratingSuccessMessage,'success')}
-      dispatch(resetMsg())
+      dispatch(ratingResetMsg())
   },[ratingSuccessMessage,dispatch])
 
   const handleAddToWatchLater = (e, movie_id) => {

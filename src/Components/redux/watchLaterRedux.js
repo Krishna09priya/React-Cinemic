@@ -3,7 +3,7 @@ import apiGateway from '../../config/service';
 import serviceEndpoints from '../../config/serviceEndpoints';
 
 
-export const resetMsg = createAction('resetMsg');
+export const watchResetMsg = createAction('resetMsg');
 
 export const postWatchlater = createAsyncThunk('/watchlater/postWatchlater', async (data, { rejectWithValue }) => {
     const body = { ...data };
@@ -48,7 +48,7 @@ const slice = createSlice({
                 state.watchLaterErrorMessage = '';
                 state.watchLaterSuccessMessage = payload?.message;
             })
-            .addCase(resetMsg, (state) => {
+            .addCase(watchResetMsg, (state) => {
                 state.watchLaterErrorMessage = '';
                 state.watchLaterSuccessMessage = '';
             });
