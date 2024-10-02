@@ -45,7 +45,8 @@ const slice = createSlice({
             })
             .addCase(postLogin.fulfilled, (state, { payload }) => {
                 if (payload?.success && payload?.data?.token) {
-                    localStorage.setItem('accessToken',payload?.data?.token);
+                    localStorage.setItem('accessToken',payload?.data?.token);  
+                    localStorage.setItem('IsSubscribed',payload?.data?.isSubscribed?.toString());
                 }
 
                 state.isLoading = false;

@@ -3,7 +3,7 @@ import apiGateway from '../../config/service';
 import serviceEndpoints from '../../config/serviceEndpoints';
 
 
-export const resetMsg = createAction('resetMsg');
+export const ratingResetMsg = createAction('resetMsg');
 
 export const postRating = createAsyncThunk('/rating/postRating', async (data, { rejectWithValue }) => {
     const body = { ...data };
@@ -48,7 +48,7 @@ const slice = createSlice({
                 state.ratingErrorMessage = '';
                 state.ratingSuccessMessage = payload?.message;
             })
-            .addCase(resetMsg, (state) => {
+            .addCase(ratingResetMsg, (state) => {
                 state.ratingErrorMessage = '';
                 state.ratingSuccessMessage = '';
             });

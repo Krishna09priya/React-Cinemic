@@ -34,13 +34,16 @@ function WatchHistory() {
         <MovieCard data={watchHistorylist?.data}/>
       </div>
     </div>
-    <div className="mt-auto">
-    <Pagination
-    currentPage={currentPage} 
-    totalPages={watchHistorylist?.totalPages} 
-    onPageChange={handlePageChange} />
     </div>
-  </div>
+    {watchHistorylist?.data && watchHistorylist.data.length > 0 && (
+        <div className="mt-auto">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={watchHistorylist?.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
 </div>
 
   );
