@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { FaRupeeSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function SubscriptionCard({showSubscribeBtn,data=[]}) {
+function SubscriptionCard({showSubscribeBtn,showScribeDate,data=[]}) {
 
   return (
     <Container>
@@ -20,7 +20,9 @@ function SubscriptionCard({showSubscribeBtn,data=[]}) {
                 <Card.Title style={{fontSize: 25,marginBottom: 10,textAlign: 'left'}}>{e?.plan}</Card.Title>
                      <Card.Text style={{fontSize: 15, textAlign:'left'}}> {e?.description}</Card.Text>
                      <Card.Text style={{fontSize: 15, textAlign:'left'}}>Price:<FaRupeeSign/>{e?.price} </Card.Text>
-                     <Card.Text style={{fontSize: 15, textAlign:'left'}}>Duration:{e?.duration}</Card.Text>
+                     <Card.Text style={{fontSize: 15, textAlign:'left'}}>Duration: {e?.duration}</Card.Text>
+                     {showScribeDate &&<> <Card.Text style={{fontSize: 15, textAlign:'left'}}>Subscribed Date: {e?.subscribedDate}</Card.Text> 
+                       <Card.Text style={{fontSize: 15, textAlign:'left'}}>validity To: {e?.validityTo}</Card.Text> </>}
                         {showSubscribeBtn &&  <button style={{marginTop : 20}}>Subscribe Now
                                     </button>}
               </Card.Body>

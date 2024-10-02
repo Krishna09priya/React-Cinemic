@@ -12,6 +12,10 @@ import subscriptionListingReducer from '../Components/redux/subscriptionListingR
 import planViewPageReducer from '../Components/redux/planViewPageRedux';
 import getWatchLaterReducer from '../Components/redux/getWatchLaterRedux';
 import getWatchHistoryReducer from '../Components/redux/getWatchHistoryRedux';
+import deleteReducer from '../Components/redux/deleteRedux';
+import changePasswordReducer from '../Components/redux/changePasswordRedux';
+import subscriptionStatusReducer from '../Components/redux/subscriptionStatusRedux';
+
 
 const rootReducer = combineReducers({
     signupReducer,
@@ -26,7 +30,10 @@ const rootReducer = combineReducers({
     subscriptionListingReducer,
     planViewPageReducer,
     getWatchLaterReducer,
-    getWatchHistoryReducer
+    getWatchHistoryReducer,
+    deleteReducer,
+    changePasswordReducer,
+    subscriptionStatusReducer
 
 });
 

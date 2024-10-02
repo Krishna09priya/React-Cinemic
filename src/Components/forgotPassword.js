@@ -13,13 +13,14 @@ function ForgotPassword() {
   const [email, setEmail]= useState('');;
 
   const submit = ()=>{
-    dispatch(postForgotPassword(email))
+    dispatch(postForgotPassword(email));
+    setEmail('');
   }
   useEffect(()=>{
     if(forgotPasswordSuccessMessage){ 
       Notifications(forgotPasswordSuccessMessage,'success')
     }
-      dispatch(resetMsg())
+      dispatch(resetMsg());
   },[forgotPasswordSuccessMessage])
 
   return (
@@ -50,6 +51,7 @@ function ForgotPassword() {
                         placeholder="Email"
                         name="email"
                         id="email"
+                        value={email}
                         onChange={(e)=>setEmail({...email, email:e.target.value})}
                       />
                     </div>

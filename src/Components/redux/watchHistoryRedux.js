@@ -3,7 +3,7 @@ import apiGateway from '../../config/service';
 import serviceEndpoints from '../../config/serviceEndpoints';
 
 
-export const resetMsg = createAction('resetMsg');
+export const watchHistoryresetMsg = createAction('resetMsg');
 
 export const postWatchHistory = createAsyncThunk('/watchhistory/postWatchHistory', async (data, { rejectWithValue }) => {
     const body = { ...data };
@@ -48,7 +48,7 @@ const slice = createSlice({
                 state.watchHistoryErrorMessage = '';
                 state.watchHistorySuccessMessage = payload?.message;
             })
-            .addCase(resetMsg, (state) => {
+            .addCase(watchHistoryresetMsg, (state) => {
                 state.watchHistoryErrorMessage = '';
                 state.watchHistorySuccessMessage = '';
             });

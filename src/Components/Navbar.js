@@ -2,10 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../Assets/Style Sheets/Navbar.css";
 import Dropdown from 'react-bootstrap/Dropdown';
 import logo from "../Assets/Image/logo-transparent-png.png";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
 function Navbar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear(); 
+  navigate('/login');
+  };
   return (
     <nav className="navbar navbar-expand-sm main-navbar-dark" style={{ height: 50 }}>
       <NavLink className="navbar-brand" to="#">
@@ -44,11 +51,11 @@ function Navbar() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="/watchlist">Watch Later</Dropdown.Item>
+        <Dropdown.Item href="/watchlater">Watch Later</Dropdown.Item>
         <Dropdown.Item href="/plan-status-page">Subscription Status</Dropdown.Item>
         <Dropdown.Item href="/watch-history">Watch History</Dropdown.Item>
         <Dropdown.Item href="/changePassword">Change Password</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+        <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
           </li>

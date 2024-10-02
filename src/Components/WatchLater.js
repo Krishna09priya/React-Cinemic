@@ -5,10 +5,13 @@ import Pagination from "./Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {getWatchlater} from "./redux/getWatchLaterRedux";
+import {deleteResetMsg} from "./redux/deleteRedux";
+import Notifications from "../utils/notifications";
 
-function Watchlist() {
+function Watchlater() {
   const dispatch = useDispatch()
   const {isLoading,watchlaterlist} = useSelector((states)=> states?.getWatchLaterReducer);
+  const {deleteMovieSuccessMessage} = useSelector((states)=> states?.deleteReducer);
 
   const [currentPage, setCurrentPage] = useState(1); 
 
@@ -19,6 +22,13 @@ function Watchlist() {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+
+  useEffect(()=>{
+    if(deleteMovieSuccessMessage){
+      Notifications(deleteMovieSuccessMessage,'success')}
+      dispatch(deleteResetMsg())
+      dispatch(getWatchlater(currentPage))
+  },[deleteMovieSuccessMessage,dispatch])
 
   return (
     <div className="watchlist-body d-flex flex-column" style={{ minHeight: "100vh", backgroundColor:"#000"}} >
@@ -34,16 +44,19 @@ function Watchlist() {
         <MovieCard showRemoveBtn data={watchlaterlist?.data}/>
       </div>
     </div>
-    <div className="mt-auto">
-    <Pagination
-    currentPage={currentPage} 
-    totalPages={watchlaterlist?.totalPages} 
-    onPageChange={handlePageChange} />
     </div>
+    {watchlaterlist?.data && watchlaterlist.data.length > 0 && (
+        <div className="mt-auto">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={watchlaterlist?.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
   </div>
-</div>
 
   );
 }
 
-export default Watchlist;
+export default Watchlater;
