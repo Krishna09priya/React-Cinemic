@@ -18,3 +18,7 @@
     background-color: #1c1c1c !important;
     border-color: #1c1c1c !important;
 }
+.navbar-toggler {
+    background-color: lightgray; 
+    border: none; 
+}

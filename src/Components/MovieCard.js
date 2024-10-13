@@ -61,7 +61,7 @@ return (
                          {showRemoveBtn &&  <button class="btn btn-danger btn-sm" onClick={(ev) => deleteWatchlaterMovie(ev, e?._id)}>
                                     Remove
                                 </button>}      
-                                <Card.Text style={{fontSize: 15, textAlign:'left', paddingTop:10}}>Rating: 4.4 </Card.Text>
+                                <Card.Text style={{fontSize: 15, textAlign:'left', paddingTop:10}}>Rating: {e?.cumulativeRating} </Card.Text>
               </Card.Body>
             </Card>
             </div> </Col>)} 
